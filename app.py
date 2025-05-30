@@ -4,6 +4,7 @@ import os
 import signal
 import sys
 import time
+import requests
 
 from channel import channel_factory
 from common import const
@@ -11,6 +12,34 @@ from config import load_config
 from plugins import *
 import threading
 
+class MCPClient:
+    def __init__(self, base_url, token):
+        self.base_url = base_url.rstrip('/')
+        self.headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json"
+        }
+
+    def handle_user_message(message, mcp_client: MCPClient):
+    if "搜索电影" in message:
+        # 简单示例，提取电影名
+        movie_name = extract_movie_name(message)  # 你自己写的提取逻辑
+        media_info = mcp_client.search_media(movie_name)
+        # 处理media_info，将结果发回微信用户
+        reply_text = format_media_info(media_info)
+        return reply_text
+        
+    def search_media(self, keyword, media_type="media"):
+        url = f"{self.base_url}/search-media"
+        data = {"keyword": keyword, "type": media_type}
+        response = requests.post(url, json=data, headers=self.headers)
+        return response.json()
+
+    def search_resources(self, mediaid, sites):
+        url = f"{self.base_url}/search-media-resources"
+        data = {"mediaid": mediaid, "sites": sites}
+        response = requests.post(url, json=data, headers=self.headers)
+        return response.json()
 
 def sigterm_handler_wrap(_signo):
     old_handler = signal.getsignal(_signo)
