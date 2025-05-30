@@ -34,6 +34,6 @@
   "use_linkai": false,
   "linkai_api_key": "",
   "linkai_app_code": ""
+  "url": "http://127.0.0.1:3111/mcp",
   "token": "${MCP_TOKEN}"
-
 }
