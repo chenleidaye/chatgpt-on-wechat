@@ -7,6 +7,7 @@ CHATGPT_ON_WECHAT_PREFIX=${CHATGPT_ON_WECHAT_PREFIX:-""}
 CHATGPT_ON_WECHAT_CONFIG_PATH=${CHATGPT_ON_WECHAT_CONFIG_PATH:-""}
 # execution command line
 CHATGPT_ON_WECHAT_EXEC=${CHATGPT_ON_WECHAT_EXEC:-""}
+envsubst < /app/plugins/config.template.json > /app/plugins/config.json
 
 # use environment variables to pass parameters
 # if you have not defined environment variables, set them below
