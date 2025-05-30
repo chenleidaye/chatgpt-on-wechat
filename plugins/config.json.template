@@ -1,7 +1,7 @@
 {
   "mcp_server": {
     "url": "http://127.0.0.1:3111/mcp",
-    "token": "${MCP_TOKEN}"
+    "token": ""
   },
   "godcmd": {
     "password": "",
